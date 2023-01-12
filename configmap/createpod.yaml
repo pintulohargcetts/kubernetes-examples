@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: configmapexamplepod
+  labels:
+    env: prod
+spec:
+  containers:
+    - image: docker.io/pintulohargcetts/nginx_custom:v1
+      name: container1
+      envFrom:
+        - configMapRef:
+            name: ucp
+
+
+
+# container inside :
+# go to inside container : kubectl exec -it configmapexamplepod -- bash

@@ -1,0 +1,29 @@
+#kubectl apply -f first-deployment.yaml; kubectl get rs -o wide -w#
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firstdeployment
+  labels: 
+    type: firstdeployment
+spec:
+  replicas: 6 # Enable during demoing
+  strategy: 
+    type: Recreate # used in development purpose.
+  selector:
+    matchLabels:
+      type: app
+  template:
+    metadata:
+      labels:
+        type: app
+    spec:
+      containers:
+      - name: firstdeploymentcontainer
+        image: docker.io/pintulohargcetts/nginx_custom:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        #ports:
+        #- containerPort: <Port>

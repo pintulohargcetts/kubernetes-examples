@@ -1,0 +1,18 @@
+
+# kubectl run firstpod --image=pintulohargcetts/nginx-custom --dry-run=client -o yaml > secondpod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: firstpod
+    env: stage
+    patched_by: pintu
+  name: secondpod
+spec:
+  containers:
+  - image: docker.io/pintulohargcetts/nginx_custom:v1
+    name: container2
+    env:
+      - name: arg1=1
+      

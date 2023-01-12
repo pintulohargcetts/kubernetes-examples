@@ -1,0 +1,33 @@
+# add label to a node
+# Add label to a node .
+# kubectl label nodes worker01 size=massive
+# kubectl label nodes worker02 size=tiny
+# kubectl label nodes worker03 size=massive
+# kubectl label nodes worker04 size=medium
+
+kind: Pod
+apiVersion: v1
+
+metadata:
+  name: configmapexamplepod
+  labels:
+    env: prod
+spec:
+  containers:
+    - image: docker.io/pintulohargcetts/nginx_custom:v1
+      name: container1
+      envFrom:
+        - configMapRef:
+            name: ucp
+   affinity:
+     nodeAffinity:
+       preferredDuringSchedulingIgnoredDuringExecution: # will try to schedule if possible , else schedule to any best nodes see:RequiredDuringSchedulingIgnoreduringExecution
+         - preference:
+             matchExpression:
+              - key: size
+                operator: In 
+                values:
+                   - massive
+           weight: 1
+      
+ 

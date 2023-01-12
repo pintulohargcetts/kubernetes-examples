@@ -1,0 +1,22 @@
+# apply taint on node 
+# A techinque where you ask your pod to go to a desirable nodes 
+# kubectl taint node worker01 msize=large:NoSchedule
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: configmapexamplepod
+  labels:
+    env: prod
+spec:
+  containers:
+    - image: docker.io/pintulohargcetts/nginx_custom:v1
+      name: container1
+      envFrom:
+        - configMapRef:
+            name: ucp
+  tolerations:
+    - effect : NoSchedule
+      key: msize  
+      value: large:NoSchedule
+      operator: Equal

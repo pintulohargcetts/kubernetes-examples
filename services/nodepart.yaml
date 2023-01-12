@@ -1,0 +1,32 @@
+#ubectl expose pod firstpod --type=NodePort --port=8000 --target-port=80 --name myfirstservice1 -o yaml
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-01-05T15:18:03Z"
+  labels:
+    env: prod
+  name: myfirstservice1
+  namespace: default
+  resourceVersion: "285893"
+  uid: fa30e65f-ff69-472b-ac8b-38ee2adee6f1
+spec:
+  clusterIP: 10.106.6.136
+  clusterIPs:
+  - 10.106.6.136
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31485
+    port: 8000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    env: prod
+    type: app
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

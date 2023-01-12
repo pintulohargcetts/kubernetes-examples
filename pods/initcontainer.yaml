@@ -1,0 +1,27 @@
+
+# check the env in single-s (docker container exec -it f1a159c40500 env)
+# docker container exec -it f1a159c40500 bash
+# using kubectl exec setenvvalueexample -it bash
+# Set Command in Pod's Containers : docker container run -itd centos sleep 30
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: initcontainer_example
+    env: stage
+    patched_by: pintu
+  name: setenvvalueexample
+spec:
+  containers:
+  - image: docker.io/pintulohargcetts/nginx_custom:v1
+    name: container-m2
+  initContainers:
+    - image: docker.io/pintulohargcetts/nginx_custom:v2
+      name: container-m3
+       env:
+        - name: c_project
+          value: seceda
+        - name: environment
+          value: dev 
+        - name: zone
+          value: kr

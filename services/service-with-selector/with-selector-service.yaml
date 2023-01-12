@@ -1,0 +1,24 @@
+#kubectl expose pod firstpod --type=NodePort --port=8000 --target-port=80 --name myfirstservice1 -o yaml
+# add label to pods: 
+# example of how services redirects the traffic by just seeing the labels
+# kubectl label pod secondpod type=app
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    env: prod
+  name: myfirstservice1
+  namespace: default
+spec:
+  ports:
+  - nodePort: 3
+    port: 8000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    type: app
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

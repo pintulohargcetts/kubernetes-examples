@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: firstpod
+  labels:
+    env: prod
+spec:
+  containers:
+    - image: docker.io/pintulohargcetts/nginx_custom:v1
+      name: container1

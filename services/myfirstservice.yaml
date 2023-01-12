@@ -1,0 +1,19 @@
+
+# My First service
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    env: prod
+  name: myfirstservice
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 80
+  selector:
+    env: prod
+status:
+  loadBalancer: {}
+

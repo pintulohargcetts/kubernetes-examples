@@ -1,0 +1,35 @@
+# kubectl apply -f first-deployment.yaml; kubectl get rs -o wide -w
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firstdeployment
+  labels: 
+    type: firstdeployment
+spec:
+  replicas: 9 # Enable during demoing
+  strategy:
+    rollingUpdate:
+      maxSurge: 0 
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      type: app
+  template:
+    metadata:
+      labels:
+        type: app
+    spec:
+      containers:
+      - name: firstdeploymentcontainer
+        image: docker.io/pintulohargcetts/nginx_custom:v1
+        resources:
+          limits: # max the container  can use. Limits as the maximum amount of a resource to be used by a container.
+            memory: "500Gi"
+            cpu: "500m"
+          requests: #minimum I want for this pod
+            memory: 400Gi
+            cpu: 0.1m
+
+        #ports:
+        #- containerPort: <Port>

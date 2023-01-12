@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  namespace: alpha
+  name: mylimitrange
+spec:
+  limits:
+    - default:
+        cpu: 200m
+        memory: 200mi
+      type: Container
+    #kubctl get limits

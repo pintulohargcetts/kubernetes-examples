@@ -1,0 +1,21 @@
+#Kubectl scale rc --replicas=2  firstreplicationcontroller
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: firstreplicaset
+spec:
+  replicas: 5
+  selector:
+     matchLabels: 
+      type: app
+    matchExpression:
+      type: app
+  template: # this is your pod specification
+    metadata:
+      name: firstpod
+      labels:
+        type: app
+    spec:
+      containers:
+        - name: containerexrc
+          image: docker.io/pintulohargcetts/nginx_custom:v1

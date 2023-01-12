@@ -1,0 +1,33 @@
+#kubectl apply -f first-deployment.yaml; kubectl get rs -o wide -w
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firstdeployment
+  labels: 
+    type: firstdeployment
+spec:
+  replicas: 6 # Enable during demoing
+  strategy:
+    rollingUpdate:
+      maxSurge: 0 
+      maxUnavailable: 1 # what will happen if I made it zero , means 6 pods must be available all the time , maxSurge required. 
+  selector:
+    matchLabels:
+      type: app
+  template:
+    metadata:
+      labels:
+        type: app
+    spec:
+      containers:
+      - name: firstdeploymentcontainer
+        image: docker.io/pintulohargcetts/nginx_custom:v2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        #ports:
+        #- containerPort: <Port>
+
+
+# default strategy rollingUpdate 25% maxSurge 25% maxUnavailable

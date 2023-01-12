@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: namespaceexamplepod
+  namespace: alpha
+  labels:
+    env: prod
+spec:
+  containers:
+    - image: docker.io/pintulohargcetts/nginx_custom:v1
+      name: namespaceexamplepodcontainer
+
+
+
+
+##Change namespace :
+#- kubectl config set-context --current --namespace=test

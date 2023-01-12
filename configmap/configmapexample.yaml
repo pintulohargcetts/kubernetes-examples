@@ -1,0 +1,14 @@
+# Create using command line 
+# kubectl create cm ucp --from-literal=db=192.168.0.136 --dry-run
+# in this example we will make the config map inject in pod
+apiVersion: v1
+
+data:
+  db: 192.168.0.136
+  key2: value2
+  profile: alpha
+kind: ConfigMap
+metadata:
+  name: ucp
+  namespace: default
+
